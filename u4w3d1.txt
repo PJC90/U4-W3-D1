@@ -2,4 +2,8 @@
 
 select nome, cognome, anno_di_nascita, regione_residenza from clienti where nome like 'M%'
 
-2-
+2-Estrarre nome e cognome dei clienti nati nel 1982
+select nome, cognome, anno_di_nascita from clienti where anno_di_nascita = 1982
+
+3-Estrarre in numero di fatture con iva al 22%
+select count(*) from fatture where iva = '22'
