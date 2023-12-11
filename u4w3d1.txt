@@ -1,0 +1,5 @@
+1- Estrarre tutti i clienti con nome mario
+
+select nome, cognome, anno_di_nascita, regione_residenza from clienti where nome like 'M%'
+
+2-
