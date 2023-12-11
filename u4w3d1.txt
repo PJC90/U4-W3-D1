@@ -7,3 +7,16 @@ select nome, cognome, anno_di_nascita from clienti where anno_di_nascita = 1982
 
 3-Estrarre in numero di fatture con iva al 22%
 select count(*) from fatture where iva = 22
+
+4-Estrarre i prodotti attivati nel 2017 e che sono in produzione o in commercio
+select * from prodotti
+where  extract(year from data_attivazione)=2017 AND (in_produzione = 'si' OR in_commercio = 'si')
+
+5-Estrarre le fatture con importo inferiore a 1000 e i dati del cliente a esse collegate
+SELECT * FROM fatture
+JOIN clienti ON id_cliente = numero_cliente
+WHERE importo < 1000
+
+6-Riportare l'elenco delle fatture(numero, importo, iva e data) con in aggiunta il nome del fornitore
+SELECT numero_fattura, importo, iva, data_fattura, denominazione FROM fatture
+FULL JOIN fornitori USING(numero_fornitore)
