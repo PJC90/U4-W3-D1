@@ -1,29 +1,48 @@
-1- Estrarre tutti i clienti con nome mario
+1- 	Estrarre tutti i clienti con nome mario
 
-select nome, cognome, anno_di_nascita, regione_residenza from clienti where nome like 'M%'
+SELECT nome, cognome, anno_di_nascita, regione_residenza FROM clienti WHERE nome like 'M%'
 
-2-Estrarre nome e cognome dei clienti nati nel 1982
-select nome, cognome, anno_di_nascita from clienti where anno_di_nascita = 1982
 
-3-Estrarre in numero di fatture con iva al 22%
+2- 	Estrarre nome e cognome dei clienti nati nel 1982
+
+
+SELECT nome, cognome, anno_di_nascita FROM clienti WHERE anno_di_nascita = 1982
+
+3- 	Estrarre in numero di fatture con iva al 22%
+
+
 SELECT COUNT(*) FROM fatture WHERE iva = 22s
 
-4-Estrarre i prodotti attivati nel 2017 e che sono in produzione o in commercio
-select * from prodotti
-where  extract(year from data_attivazione)=2017 AND (in_produzione = 'si' OR in_commercio = 'si')
 
-5-Estrarre le fatture con importo inferiore a 1000 e i dati del cliente a esse collegate
+4- 	Estrarre i prodotti attivati nel 2017 e che sono in produzione o in commercio
+
+SELECT * FROM prodotti
+WHERE  EXTRACT(YEAR FROM data_attivazione)=2017 AND (in_produzione = 'si' OR in_commercio = 'si')
+
+
+5- 	Estrarre le fatture con importo inferiore a 1000 e i dati del cliente a esse collegate
+
 SELECT * FROM fatture
 JOIN clienti ON id_cliente = numero_cliente
 WHERE importo < 1000
 
-6-Riportare l'elenco delle fatture(numero, importo, iva e data) con in aggiunta il nome del fornitore
+
+6- 	Riportare l'elenco delle fatture(numero, importo, iva e data) con in aggiunta il nome del fornitore
+
 SELECT numero_fattura, importo, iva, data_fattura, denominazione FROM fatture
 FULL JOIN fornitori USING(numero_fornitore)
 
-7-Considerando soltanto le fattura con iva al 20%, estrarre il numero di fatture per ogni anno
+
+7- 	Considerando soltanto le fattura con iva al 20%, estrarre il numero di fatture per ogni anno
+
 SELECT COUNT(*), EXTRACT(YEAR FROM data_fattura) AS anno FROM fatture 
  WHERE iva = 22 GROUP BY anno
 
 EXTRACT(YEAR FROM data_fattura) AS anno estrae l'anno dalla colonna data_fattura. La parola chiave AS anno assegna un alias (un nome temporaneo) a questa espressione, così puoi facilmente riferirti a essa nel resto della query (in questo caso nella clausola GROUP BY).
 GROUP BY anno raggruppa i risultati in base all'anno estratto dalla data della fattura. Questo significa che la funzione COUNT(*) conteggerà il numero di fatture per ogni anno diverso presente nel dataset.
+
+
+8- 	Riportare il numero di fatture e la somma dei relativi importi divisi per anno di fatturazione
+
+SELECT COUNT(*), EXTRACT(YEAR FROM data_fattura) AS anno, SUM(importo) FROM fatture 
+ WHERE iva = 22 GROUP BY anno
