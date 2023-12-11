@@ -6,4 +6,4 @@ select nome, cognome, anno_di_nascita, regione_residenza from clienti where nome
 select nome, cognome, anno_di_nascita from clienti where anno_di_nascita = 1982
 
 3-Estrarre in numero di fatture con iva al 22%
-select count(*) from fatture where iva = '22'
+select count(*) from fatture where iva = 22
